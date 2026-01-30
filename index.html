@@ -184,33 +184,6 @@
         
         .card:hover .card-img-holder img { transform: scale(1.05); }
 
-        /* Badge overlay on image */
-        .badge-row {
-            position: absolute;
-            left: 12px;
-            top: 12px;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            align-items: center;
-            z-index: 2;
-        }
-
-        .pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 10px;
-            border-radius: 999px;
-            font-size: 11px;
-            border: 1px solid rgba(11, 37, 69, 0.2);
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            color: var(--primary-navy);
-            letter-spacing: 0.2px;
-            font-weight: 500;
-        }
-
         .card-body {
             padding: 1.5rem;
             flex-grow: 1;
@@ -218,7 +191,7 @@
             flex-direction: column;
         }
 
-        /* Company line with badge and type */
+        /* Company line with logo and type */
         .company-line {
             display: flex;
             align-items: center;
@@ -227,15 +200,14 @@
             margin-bottom: 0.75rem;
         }
 
-        .company-badge {
-            font-size: 12px;
-            color: var(--primary-navy);
+        .company-logo {
+            width: 80px;
+            height: 40px;
+            object-fit: contain;
+            background-color: var(--soft-green);
             border: 1px solid var(--tech-green);
-            padding: 5px 10px;
-            border-radius: 999px;
-            background: var(--soft-green);
-            white-space: nowrap;
-            font-weight: 600;
+            border-radius: 8px;
+            padding: 5px;
         }
 
         .tiny {
@@ -261,7 +233,30 @@
 
         .card-footer {
             margin-top: auto;
+        }
+
+        /* Pills below button */
+        .card-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 1rem;
             padding-top: 1rem;
+            border-top: 1px solid var(--bg-grey);
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            border: 1px solid rgba(11, 37, 69, 0.2);
+            background: var(--soft-green);
+            color: var(--primary-navy);
+            letter-spacing: 0.2px;
+            font-weight: 500;
         }
 
         .btn-view {
@@ -473,16 +468,11 @@
             <!-- PROFESSIONAL UX -->
             <div class="card show" data-category="professional-ux">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: UX UI Designer</span>
-                        <span class="pill">Professional UX</span>
-                    </div>
                     <img src="images/Intwistic.png" alt="InTwistic UI Library">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">InTwistic</span>
-                        <span class="tiny">UX component library</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=InTwistic" alt="InTwistic Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Various Mobile and Online applications</h3>
                     <p class="card-snippet">Built reusable UI libraries and patterns to speed delivery and keep multi-client app designs consistent.</p>
@@ -490,14 +480,22 @@
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Various Mobile and Online applications"
-                            data-role="UX UI Designer | Professional UX"
+                            data-role="UX UI Designer"
+                            data-category-label="Professional UX"
                             data-challenge="Multiple client apps needed consistent, scalable UI patterns while maintaining speed and quality across different products."
                             data-action="Defined a reusable UI element library and interaction standards across input controls, navigation, and informational components to support delivery across mobile and online applications."
                             data-result="Improved consistency and speed by enabling repeatable design assets across projects and reducing rework through standardised UI components."
                             data-tools="Sketch, Figma, Adobe Illustrator, Miro"
                             data-img="images/Intwistic.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                            <span class="pill">Role: UX UI Designer</span>
+                            <span class="pill">Professional UX</span>
+                            <span class="pill">UX component library</span>
+                            <span class="pill">UX component library</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -505,186 +503,204 @@
             <!-- PROFESSIONAL APPLICATION -->
             <div class="card show" data-category="professional-application">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: UX UI Lead</span>
-                        <span class="pill">Professional Application</span>
-                    </div>
                     <img src="images/CIMAS_App.png" alt="CIMAS Online">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">JWPM</span>
-                        <span class="tiny">Clinical triage</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=JWPM" alt="JWPM Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Triage Information Management Application</h3>
                     <p class="card-snippet">UX and UI rollout for an online triage booking application used in health in custody settings.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="CIMAS Online Call Information Management Application Systems – Online booking application"
-                            data-role="UX UI Lead | Professional Application"
+                            data-role="UX UI Lead"
+                            data-category-label="Professional Application"
                             data-challenge="A clinical triage workflow needed a clear, usable online booking experience across a wide operational footprint."
                             data-action="Created the CIMAS identity and applied it across the online experience. Defined UI direction and supported delivery across touchpoints."
                             data-result="Supported adoption of a unified digital booking experience aligned to operational triage needs."
                             data-tools="Adobe XD, Adobe Illustrator, Adobe Photoshop, Miro"
                             data-img="images/CIMAS_App.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: UX UI Lead</span>
+                        <span class="pill">Professional Application</span>
+                            <span class="pill">Clinical triage</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card show" data-category="professional-application">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: UX UI Lead</span>
-                        <span class="pill">Professional Application</span>
-                    </div>
                     <img src="images/CIMAS_App.jpg" alt="CIMAS Mobile">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">JWPM</span>
-                        <span class="tiny">Mobile UX</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=JWPM" alt="JWPM Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">CIMAS Mobile Call Information Management</h3>
                     <p class="card-snippet">Brand and UX aligned mobile experience for CIMAS, built to extend the same operational workflow on iOS and Android.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="CIMAS Mobile Call Information Management Application Systems – Mobile application"
-                            data-role="UX UI Lead | Professional Application"
+                            data-role="UX UI Lead"
+                            data-category-label="Professional Application"
                             data-challenge="The CIMAS workflow needed a consistent mobile experience that maintained clarity and trust in operational health contexts."
                             data-action="Extended the CIMAS design system into mobile touchpoints and supported marketing rollout for the mobile application version."
                             data-result="Delivered a consistent CIMAS experience across platforms to support field usage and operational continuity."
                             data-tools="Adobe XD, Adobe Illustrator, Adobe Photoshop, Miro"
                             data-img="images/CIMAS_App.jpg">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: UX UI Lead</span>
+                        <span class="pill">Professional Application</span>
+                            <span class="pill">Mobile UX</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card show" data-category="professional-application">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: Collaborative UI Designer</span>
-                        <span class="pill">Professional Application</span>
-                    </div>
                     <img src="images/Lloyds_App_Library.png" alt="Lloyds TSB CIMAS">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">InTwistic</span>
-                        <span class="tiny">Client: Lloyds</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=InTwistic" alt="InTwistic Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Lloyds TSB Call Information Management</h3>
                     <p class="card-snippet">Collaborative UI design work supporting an online application delivery for a major banking client.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="InTwistic – Client: Lloyds TSB Call Information Management Application Systems – Online application"
-                            data-role="Collaborative UI Designer | Professional Application"
+                            data-role="Collaborative UI Designer"
+                            data-category-label="Professional Application"
                             data-challenge="Online application UI required consistency and quality while collaborating within a client delivery environment."
                             data-action="Contributed to UI design delivery, aligning components and screens to shared standards and client expectations."
                             data-result="Supported delivery of a coherent online UI for the client programme."
                             data-tools="Sketch, Figma, Adobe Illustrator, Miro"
                             data-img="images/Lloyds_App_Library.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: Collaborative UI Designer</span>
+                        <span class="pill">Professional Application</span>
+                            <span class="pill">Client: Lloyds</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card show" data-category="professional-application">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: Lead UX UI Designer</span>
-                        <span class="pill">Professional Application</span>
-                    </div>
                     <img src="images/FoodMama_Apps.png" alt="FoodMama Application">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">InTwistic</span>
-                        <span class="tiny">Food and hospitality</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=InTwistic" alt="InTwistic Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">FoodMama Hospitality Menu App</h3>
                     <p class="card-snippet">End to end UX and UI across mobile, online, and admin backend for a hospitality platform.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Full UX UI Design for the FoodMama Application"
-                            data-role="Lead UX UI Designer | Professional Application"
+                            data-role="Lead UX UI Designer"
+                            data-category-label="Professional Application"
                             data-challenge="A multi-surface product needed consistent UX across user apps and a full administration backend."
                             data-action="Designed user facing iOS and Android experiences and created UX UI for the administration backend system to support operations."
                             data-result="Delivered a coherent platform experience across customer and admin journeys."
                             data-tools="Sketch, Figma, Adobe Illustrator, Adobe Photoshop, Miro, Amazon Web Services (AWS), Python"
                             data-img="images/FoodMama_Apps.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: Lead UX UI Designer</span>
+                        <span class="pill">Professional Application</span>
+                            <span class="pill">Food and hospitality</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card show" data-category="professional-application">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: UX UI Designer</span>
-                        <span class="pill">Professional Application</span>
-                    </div>
                     <img src="images/Korrito_App.png" alt="Korrito Mobile App">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">InTwistic</span>
-                        <span class="tiny">Client: Korrito</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=InTwistic" alt="InTwistic Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Korrito Menu Mobile App</h3>
                     <p class="card-snippet">Mobile experience enabling a restaurant brand to publish their menu and presence across iOS and Android.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Korrito restaurant mobile application"
-                            data-role="UX UI Designer | Professional Application"
+                            data-role="UX UI Designer"
+                            data-category-label="Professional Application"
                             data-challenge="A restaurant needed a mobile presence to promote the brand and make the menu accessible on mobile platforms."
                             data-action="Designed the mobile user experience to present menu information and brand experience across iOS and Android."
                             data-result="Supported a successful digital menu deployment that helped validate later platform concepts."
                             data-tools="Sketch, Figma, Adobe Illustrator, Adobe Photoshop, Miro"
                             data-img="images/Korrito_App.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: UX UI Designer</span>
+                        <span class="pill">Professional Application</span>
+                            <span class="pill">Client: Korrito</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card show" data-category="professional-application">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: Product Designer</span>
-                        <span class="pill">Professional Application</span>
-                    </div>
                     <img src="images/Nomura_MAD.png" alt="Nomura PowerPoint Add-on">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">Nomura</span>
-                        <span class="tiny">PowerPoint add-in</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=Nomura" alt="Nomura Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Corporate Media Access Database</h3>
                     <p class="card-snippet">PowerPoint add-on that centralised brand approved image sourcing and improved workflow for global teams.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Nomura International plc Media Access Database, PowerPoint Add-on and Online application"
-                            data-role="Product Designer | Professional Application"
+                            data-role="Product Designer"
+                            data-category-label="Professional Application"
                             data-challenge="Users needed fast access to brand approved assets while reducing unmonitored image procurement and enforcing compliance."
                             data-action="Designed and delivered a Microsoft PowerPoint add-on using VBA that enabled keyword search, preview, and direct insertion from a centralised assets library."
                             data-result="Streamlined image sourcing and supported brand consistency at scale by making approved assets easy to find and use."
                             data-tools="Microsoft PowerPoint, VBA"
                             data-img="images/Nomura_MAD.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: Product Designer</span>
+                        <span class="pill">Professional Application</span>
+                            <span class="pill">PowerPoint add-in</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -692,279 +708,306 @@
             <!-- PROFESSIONAL WEBSITE -->
             <div class="card show" data-category="professional-website">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: UX Product Designer</span>
-                        <span class="pill">Professional Website</span>
-                    </div>
                     <img src="images/Pharming_Degreed_App.png" alt="Pharming Degreed Portal">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">Pharming</span>
-                        <span class="tiny">Onboarding portal</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=Pharming" alt="Pharming Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Onboarding and Training Portal</h3>
                     <p class="card-snippet">Designed a central learning portal to support onboarding and continuous training across corporate teams.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Pharming Group Group wide onboarding and training application portal - Degreed"
-                            data-role="UX Product Designer | Professional Website"
+                            data-role="UX Product Designer"
+                            data-category-label="Professional Website"
                             data-challenge="New hires and existing teams needed a single, clear place to access corporate learning content across devices."
                             data-action="Conceptualised and built an online training portal on Degreed. Structured content with branded modules and collaborated with internal SMEs to shape learning content."
                             data-result="Delivered a self paced knowledge hub that improved access to onboarding and training materials."
                             data-tools="Degreed, Figma, Miro"
                             data-img="images/Pharming_Degreed_App.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: UX Product Designer</span>
+                        <span class="pill">Professional Website</span>
+                            <span class="pill">Onboarding portal</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card show" data-category="professional-website">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: UX UI Designer</span>
-                        <span class="pill">Professional Website</span>
-                    </div>
                     <img src="images/NELCSU_OnlineTraining.jpg" alt="NHS NEL Training Portal">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">NHS</span>
-                        <span class="tiny">Training platform</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=NHS" alt="NHS Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">NHS Training Portal</h3>
                     <p class="card-snippet">eLearning portal designed for multi-device training delivery with a media management backend.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="NEL Commissioning Support Unit (NHS) Training portal designed and developed using Totoro"
-                            data-role="UX UI Designer | Professional Website"
+                            data-role="UX UI Designer"
+                            data-category-label="Professional Website"
                             data-challenge="Teams needed a structured eLearning platform to deliver EPR training with consistent access across devices."
                             data-action="Designed the training portal experience and aligned it to organisational branding. Integrated Totoro as the backend for media management."
                             data-result="Delivered a cohesive training portal that supported system training delivery and content management."
                             data-tools="Totoro, Miro, Powerpoint"
                             data-img="images/NELCSU_OnlineTraining.jpg">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: UX UI Designer</span>
+                        <span class="pill">Professional Website</span>
+                            <span class="pill">Training platform</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card show" data-category="professional-website">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: UX UI Designer</span>
-                        <span class="pill">Professional Website</span>
-                    </div>
                     <img src="images/CieloCosta_Online.png" alt="Cielo Costa Online">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">Cielo Costa</span>
-                        <span class="tiny">Corporate platform</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=Cielo+Costa" alt="Cielo Costa Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Corporate Website</h3>
                     <p class="card-snippet">Corporate portal designed for marketing purposes.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Cielo Costa coporate portal designed and deployed"
-                            data-role="UX UI Designer | Professional Website"
+                            data-role="UX UI Designer"
+                            data-category-label="Professional Website"
                             data-challenge="Teams needed a structured marketing platform to deliver information and awareness across devices."
                             data-action="Designed the training marketing portal and aligned it to organisational branding."
                             data-result="Delivered a cohesive marketing portal that supported online system training delivery and content management."
                             data-tools="Figma, Powerpoint, SquareSpace"
                             data-img="images/CieloCosta_Online.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: UX UI Designer</span>
+                        <span class="pill">Professional Website</span>
+                            <span class="pill">Corporate platform</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card show" data-category="professional-website">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: UX UI Designer</span>
-                        <span class="pill">Professional Website</span>
-                    </div>
                     <img src="images/JWPM_Online.png" alt="JWPM Portal">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">JWPM</span>
-                        <span class="tiny">Corporate platform</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=JWPM" alt="JWPM Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Corporate Website</h3>
                     <p class="card-snippet">Corporate portal designed for marketing purposes.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="JWPM coporate portal designed and deployed"
-                            data-role="UX UI Designer | Professional Website"
+                            data-role="UX UI Designer"
+                            data-category-label="Professional Website"
                             data-challenge="Teams needed a structured marketing platform to deliver information and awareness across devices."
                             data-action="Designed the training marketing portal and aligned it to organisational branding."
                             data-result="Delivered a cohesive marketing portal that supported online system training delivery and content management."
                             data-tools="Figma, Miro, SquareSpace"
                             data-img="images/JWPM_Online.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: UX UI Designer</span>
+                        <span class="pill">Professional Website</span>
+                            <span class="pill">Corporate platform</span>
+                        </div>
                     </div>
                 </div>
             </div>
  
             <div class="card show" data-category="professional-website">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: UX UI Designer</span>
-                        <span class="pill">Professional Website</span>
-                    </div>
                     <img src="images/Intwistic_Online.png" alt="Intwistic Online">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">Intwistic</span>
-                        <span class="tiny">Marketing Website</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=Intwistic" alt="Intwistic Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Corporate Marketing Website</h3>
                     <p class="card-snippet">Corporate website designed for marketing purposes.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Intwistic marketing portal designed and deployed"
-                            data-role="UX UI Designer | Professional Website"
+                            data-role="UX UI Designer"
+                            data-category-label="Professional Website"
                             data-challenge="Teams needed a structured marketing platform to deliver information and awareness across devices."
                             data-action="Designed the training marketing portal and aligned it to organisational branding."
                             data-result="Delivered a cohesive marketing portal that supported online system training delivery and content management."
                             data-tools="Figma, Adobe XD, Adobe Illustrator, Adobe Photoshop, Miro"
                             data-img="images/Intwistic_Online.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: UX UI Designer</span>
+                        <span class="pill">Professional Website</span>
+                            <span class="pill">Marketing Website</span>
+                        </div>
                     </div>
                 </div>
             </div>           
   
             <div class="card show" data-category="professional-website">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: UX UI Designer</span>
-                        <span class="pill">Professional Website</span>
-                    </div>
                     <img src="images/FoodMama_Online.jpg" alt="Foodamama Portal">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">FoodMama</span>
-                        <span class="tiny">Marketing Website</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=FoodMama" alt="FoodMama Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Corporate Marketing Website</h3>
                     <p class="card-snippet">Corporate website designed for marketing purposes.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="FoodMama marketing portal designed and deployed"
-                            data-role="UX UI Designer | Professional Website"
+                            data-role="UX UI Designer"
+                            data-category-label="Professional Website"
                             data-challenge="Teams needed a structured marketing platform to deliver information and awareness across devices."
                             data-action="Designed the training marketing portal and aligned it to organisational branding."
                             data-result="Delivered a cohesive marketing portal that supported online system training delivery and content management."
                             data-tools="Figma, Adobe Illustrator, Adobe Photoshop, Miro, Pixabay"
                             data-img="images/FoodMama_Online.jpg">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: UX UI Designer</span>
+                        <span class="pill">Professional Website</span>
+                            <span class="pill">Marketing Website</span>
+                        </div>
                     </div>
                 </div>
             </div>                  
             <!-- PROFESSIONAL DASHBOARD -->
             <div class="card show" data-category="professional-dashboard">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: Analytics UX Designer</span>
-                        <span class="pill">Professional Dashboard</span>
-                    </div>
                     <img src="images/Aimmune_Dashboard.png" alt="Aimmune PowerBI Dashboard">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">Aimmune</span>
-                        <span class="tiny">Commercial launch</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=Aimmune" alt="Aimmune Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Drug Product Commercial Launch Insights Dashboard</h3>
                     <p class="card-snippet">Power BI dashboard concept and build for commercial operations insight across launch, supply, and field interface data.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Aimmune Therapeutics Drug Product Commercial Launch / Project Management Insights Dashboard PowerBi"
-                            data-role="Analytics UX Designer | Professional Dashboard"
+                            data-role="Analytics UX Designer"
+                            data-category-label="Professional Dashboard"
                             data-challenge="Commercial operations needed a single dashboard view of launch related insights spanning project workstreams and performance signals."
                             data-action="Designed and developed a Power BI dashboard that structured insight across market access, sales and distribution, supply chain, and CRM aligned field interface data."
                             data-result="Delivered an interactive dashboard that provided a clearer operational view of the commercial launch context."
                             data-tools="Miro, Power BI, Excel, Veeva CRM, MasterControl, Datalake"
                             data-img="images/Aimmune_Dashboard.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: Analytics UX Designer</span>
+                        <span class="pill">Professional Dashboard</span>
+                            <span class="pill">Commercial launch</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card show" data-category="professional-dashboard">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: Analytics UX Designer</span>
-                        <span class="pill">Professional Dashboard</span>
-                    </div>
                     <img src="images/Ruconest_Dashboard.png" alt="Pharming PowerBI Dashboard">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">Pharming</span>
-                        <span class="tiny">Commercial insights</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=Pharming" alt="Pharming Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Drug Product Ruconest Commercial Insights Dashboard</h3>
                     <p class="card-snippet">Power BI dashboard designed to unify the Ruconest product and commercial operations insight with interactive exploration.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Pharming Group Ruconest Drug Product Commercial Insights Dashboard"
-                            data-role="Analytics UX Designer | Professional Dashboard"
+                            data-role="Analytics UX Designer"
+                            data-category-label="Professional Dashboard"
                             data-challenge="Commercial operations needed a consolidated Supply Chain view of the Ruconesty product with commercial insight to support decision making."
                             data-action="Designed and developed a Power BI dashboard to organise insight across market access, sales and distribution, and CRM aligned field interface data."
                             data-result="Delivered an interactive Ruconest Supply Chain  view designed to support clarity and alignment."
                             data-tools="Miro, Power BI, Excel, Veeva CRM, MasterControl, Datalake"
                             data-img="images/Ruconest_Dashboard.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: Analytics UX Designer</span>
+                        <span class="pill">Professional Dashboard</span>
+                            <span class="pill">Commercial insights</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card show" data-category="professional-dashboard">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: Analytics UX Designer</span>
-                        <span class="pill">Professional Dashboard</span>
-                    </div>
                     <img src="images/Pharming_APDS_Scorecard.png" alt="Pharming PowerBI Dashboard">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">Pharming</span>
-                        <span class="tiny">EU APDS Scorecard</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=Pharming" alt="Pharming Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">EU Commercial Insights Scorecard Dashboard</h3>
                     <p class="card-snippet">Power BI dashboard designed to unify product and commercial data with interactive exploration.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Pharming Group EU Commercial Insights Scorecard Dashboard PowerBi"
-                            data-role="Analytics UX Designer | Professional Dashboard"
+                            data-role="Analytics UX Designer"
+                            data-category-label="Professional Dashboard"
                             data-challenge="Commerical operations required a consolidated view of EU commercial insight to support senior leadership decision making."
                             data-action="Designed and developed a Power BI dashboard to agregate data across market access, sales and distribution, and CRM aligned field interface data."
                             data-result="Delivered an interactive commercial operations view designed to support clarity and alignment."
                             data-tools="Miro, Power BI, Excel, Veeva CRM, MasterControl, Datalake"
                             data-img="images/Pharming_APDS_Scorecard.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: Analytics UX Designer</span>
+                        <span class="pill">Professional Dashboard</span>
+                            <span class="pill">EU APDS Scorecard</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -972,93 +1015,102 @@
             <!-- TERTIARY EDUCATION -->
             <div class="card show" data-category="tertiary-education">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: Student UX Designer</span>
-                        <span class="pill">Tertiary Education Portfolio</span>
-                    </div>
                     <img src="images/School_WeatherAppa.png" alt="Vibe Weather App">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">School of UX</span>
-                        <span class="tiny">Build and iterate</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=School+of+UX" alt="School of UX Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Project: Vibe Coded Weather Application</h3>
                     <p class="card-snippet">Designed in Figma then built using loveable.com, iterated through testing, and published as a live app.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Project: Vibe Coding Weather Application"
-                            data-role="Student UX Designer | Tertiary Education Portfolio"
+                            data-role="Student UX Designer"
+                            data-category-label="Tertiary Education Portfolio"
                             data-challenge="Create a usable weather experience from design through build, then iterate based on feedback and testing."
                             data-action="Designed initial UI in Figma and implemented a working version using loveable.com, then refined through iteration and user testing."
                             data-result="Published a live working application and validated changes through iteration."
                             data-tools="Figma, loveable.com, Github"
                             data-img="images/School_WeatherAppa.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: Student UX Designer</span>
+                        <span class="pill">Tertiary Education Portfolio</span>
+                            <span class="pill">Build and iterate</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card show" data-category="tertiary-education">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: Student UX Designer</span>
-                        <span class="pill">Tertiary Education Portfolio</span>
-                    </div>
                     <img src="images/School_MilesandMiles.png" alt="Miles and Miles Proposal">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">School of UX</span>
-                        <span class="tiny">Concept proposal</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=School+of+UX" alt="School of UX Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Project: Miles and Miles Online App Design Proposal</h3>
                     <p class="card-snippet">Student proposal project focused on defining an online application concept and user centred direction.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Project: Miles and Miles Online Application Proposal"
-                            data-role="Student UX Designer | Tertiary Education Portfolio"
+                            data-role="Student UX Designer"
+                            data-category-label="Tertiary Education Portfolio"
                             data-challenge="Translate a problem space into a clear application proposal with a coherent user experience direction."
                             data-action="Developed the proposal structure and UX direction for an online application concept using a user centred approach."
                             data-result="Produced a proposal ready to present with defined UX direction."
                             data-tools="Figma, Github"
                             data-img="images/School_MilesandMiles.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: Student UX Designer</span>
+                        <span class="pill">Tertiary Education Portfolio</span>
+                            <span class="pill">Concept proposal</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card show" data-category="tertiary-education">
                 <div class="card-img-holder">
-                    <div class="badge-row">
-                        <span class="pill">Role: Student UX Designer</span>
-                        <span class="pill">Tertiary Education Portfolio</span>
-                    </div>
                     <img src="images/School_YukaCaseStudy.png" alt="Yuka Redesign Proposal">
                 </div>
                 <div class="card-body">
                     <div class="company-line">
-                        <span class="company-badge">School of UX</span>
-                        <span class="tiny">Redesign proposal</span>
+                        <img src="https://via.placeholder.com/80x40/e9f5f3/0b2545?text=School+of+UX" alt="School of UX Logo" class="company-logo">
                     </div>
                     <h3 class="card-title">Project: Yuka App Redesign Proposal</h3>
                     <p class="card-snippet">Student redesign proposal focused on improving an application experience through UX driven changes.</p>
                     
+                    
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Project: Yuka Redesign Application Proposal"
-                            data-role="Student UX Designer | Tertiary Education Portfolio"
+                            data-role="Student UX Designer"
+                            data-category-label="Tertiary Education Portfolio"
                             data-challenge="Identify UX problems in an existing app experience and propose a redesign that improves usability and clarity."
                             data-action="Created a redesign proposal with UX focused improvements and a clearer user experience direction."
                             data-result="Produced a redesign proposal suitable for presentation and iteration."
                             data-tools="Figma, Github"
                             data-img="images/School_YukaCaseStudy.png">
-                            View Case Study <i class="fas fa-arrow-right"></i>
+                            View Project <i class="fas fa-arrow-right"></i>
                         </button>
+                        
+                        <div class="card-pills">
+                        <span class="pill">Role: Student UX Designer</span>
+                        <span class="pill">Tertiary Education Portfolio</span>
+                            <span class="pill">Redesign proposal</span>
+                        </div>
                     </div>
                 </div>
             </div>
