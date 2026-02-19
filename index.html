@@ -9,7 +9,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://kit.fontawesome.com/482cf0011a.js" crossorigin="anonymous"></script>
 
     <style>
         /* --- CSS VARIABLES --- */
@@ -284,7 +283,7 @@
         footer p { margin: 0; font-size: 0.9rem; }
 
         /* ================================================================
-           MODAL — HORIZONTAL PROJECT DETAIL CARD (matches the PNG layout)
+           PROJECT DETAIL MODAL
         ================================================================ */
         .modal-overlay {
             position: fixed;
@@ -300,7 +299,6 @@
 
         .modal-overlay.active { display: flex; }
 
-        /* The card shell — light blue background like the PNG */
         .modal-content {
             background: #c5dbe8;
             border-radius: 20px;
@@ -317,7 +315,6 @@
             to   { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* Close button */
         .close-btn {
             position: absolute;
             top: 1.25rem;
@@ -345,10 +342,9 @@
             transform: rotate(90deg);
         }
 
-        /* --- Title block --- */
         .modal-card-header {
             padding: 1.5rem 1.75rem 0.9rem 1.75rem;
-            padding-right: 4rem; /* clear the close button */
+            padding-right: 4rem;
         }
 
         .modal-card-header h2 {
@@ -370,7 +366,6 @@
             letter-spacing: 0.3px;
         }
 
-        /* --- Main body: image LEFT | CAR text RIGHT --- */
         .modal-card-body {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -379,13 +374,15 @@
             align-items: stretch;
         }
 
-        /* Left: hero image */
+        /* Clickable image panel */
         .modal-img-panel {
             border-radius: 14px;
             overflow: hidden;
             background: #fff;
             min-height: 280px;
             flex-shrink: 0;
+            position: relative;
+            cursor: zoom-in;
         }
 
         .modal-img-panel img {
@@ -393,9 +390,37 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.4s ease, filter 0.4s ease;
         }
 
-        /* Right: Challenge / Action / Outcome */
+        /* Hover hint overlay */
+        .modal-img-panel::after {
+            content: '\f00e'; /* fa-search-plus */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            background: rgba(11, 37, 69, 0);
+            transition: background 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            border-radius: 14px;
+        }
+
+        .modal-img-panel:hover::after {
+            background: rgba(11, 37, 69, 0.45);
+            opacity: 1;
+        }
+
+        .modal-img-panel:hover img {
+            transform: scale(1.03);
+            filter: brightness(0.88);
+        }
+
         .modal-car-panel {
             display: flex;
             flex-direction: column;
@@ -427,7 +452,6 @@
             opacity: 0.9;
         }
 
-        /* --- Tools footer --- */
         .modal-card-footer {
             border-top: 1px solid rgba(11, 37, 69, 0.15);
             padding: 0.9rem 1.75rem 1.4rem 1.75rem;
@@ -462,6 +486,115 @@
             white-space: nowrap;
         }
 
+        /* ================================================================
+           IMAGE LIGHTBOX — sits above the project modal (z-index: 2000)
+        ================================================================ */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 2rem;
+            animation: lbFadeIn 0.25s ease;
+        }
+
+        @keyframes lbFadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        .lightbox-overlay.active { display: flex; }
+
+        /* Wrapper constrains max dimensions based on orientation */
+        .lightbox-img-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1400px;
+            max-height: 90vh;
+            width: 100%;
+        }
+
+        .lightbox-img-wrapper img {
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            animation: lbImgIn 0.3s ease;
+
+            /* Horizontal images: up to 1400px wide, 500px tall */
+            max-width: 1400px;
+            max-height: 90vh;
+
+            /* Adapt to viewport */
+            width: auto;
+            height: auto;
+
+            /* Ensure it never exceeds its natural size */
+            object-fit: contain;
+        }
+
+        /* If the image is portrait, we cap the height more aggressively */
+        .lightbox-img-wrapper.portrait img {
+            max-height: min(1200px, 90vh);
+            max-width: min(500px, 95vw);
+        }
+
+        /* If the image is landscape */
+        .lightbox-img-wrapper.landscape img {
+            max-width: min(1400px, 95vw);
+            max-height: min(500px, 85vh);
+        }
+
+        @keyframes lbImgIn {
+            from { opacity: 0; transform: scale(0.93); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        /* Close button — top right of the image */
+        .lightbox-close {
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            background: var(--primary-navy);
+            border: 2.5px solid white;
+            color: white;
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            line-height: 1;
+            font-family: sans-serif;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        .lightbox-close:hover {
+            background: var(--tech-green);
+            border-color: white;
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* Click-outside hint text */
+        .lightbox-hint {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.5);
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
@@ -471,6 +604,7 @@
             .modal-card-body { grid-template-columns: 1fr; }
             .modal-img-panel { min-height: 200px; }
             .modal-card-header { padding-right: 3.5rem; }
+            .lightbox-overlay { padding: 1rem; }
         }
     </style>
 </head>
@@ -482,9 +616,9 @@
         <h1>Donny Moricom | UX Portfolio</h1>
         <p>UX Designer with deep project delivery experience. With over fifteen years leading digital and service design work in finance, healthcare, and pharmaceutical environments where clarity, compliance, and delivery matter.</p>
         <div class="social-links">
-            <a href="https://www.linkedin.com/in/eudonni/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:donny@emit.studio" target="_blank" aria-label="Email"><i class="fas fa-envelope"></i></a>
-            <a href="https://linktr.ee/donnymoricom" target="_blank" aria-label="LinkTree"><i class="fa-solid fa-link"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
         </div>
     </div>
 
@@ -1138,25 +1272,21 @@
     </footer>
 
     <!-- ================================================================
-         MODAL — NEW HORIZONTAL PROJECT DETAIL CARD (matches your PNG)
-         Title + Role badge at top
-         Large image LEFT | Challenge / Action / Outcome RIGHT
-         Tools & Methodologies pills across the bottom
+         PROJECT DETAIL MODAL
     ================================================================ -->
     <div class="modal-overlay" id="projectModal" onclick="handleOverlayClick(event)">
         <div class="modal-content">
 
             <button class="close-btn" onclick="toggleModal()" aria-label="Close">&times;</button>
 
-            <!-- Title + role -->
             <div class="modal-card-header">
                 <h2 id="m-title"></h2>
                 <span class="modal-role-badge" id="m-role"></span>
             </div>
 
-            <!-- Image left | CAR right -->
             <div class="modal-card-body">
-                <div class="modal-img-panel">
+                <!-- Clicking the image panel fires openLightbox() -->
+                <div class="modal-img-panel" onclick="openLightbox()" title="Click to enlarge image">
                     <img src="" alt="" id="m-img">
                 </div>
                 <div class="modal-car-panel">
@@ -1175,7 +1305,6 @@
                 </div>
             </div>
 
-            <!-- Tools footer -->
             <div class="modal-card-footer">
                 <span class="modal-footer-label">Tools and Methodologies</span>
                 <div class="modal-tool-pills" id="m-tools"></div>
@@ -1184,8 +1313,21 @@
         </div>
     </div>
 
+    <!-- ================================================================
+         IMAGE LIGHTBOX — renders above project modal (z-index 2000)
+    ================================================================ -->
+    <div class="lightbox-overlay" id="lightboxOverlay" onclick="handleLightboxClick(event)">
+        <div class="lightbox-img-wrapper" id="lightboxWrapper">
+            <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close image">&times;</button>
+            <img src="" alt="" id="lightbox-img">
+        </div>
+        <p class="lightbox-hint">Click outside the image to close</p>
+    </div>
+
     <script>
-        // --- FILTER LOGIC ---
+        /* --------------------------------------------------------
+           FILTER
+        -------------------------------------------------------- */
         const filterBtns = document.querySelectorAll('.filter-btn');
         const cards      = document.querySelectorAll('.card');
 
@@ -1206,7 +1348,9 @@
             });
         });
 
-        // --- MODAL LOGIC ---
+        /* --------------------------------------------------------
+           PROJECT DETAIL MODAL
+        -------------------------------------------------------- */
         const modal   = document.getElementById('projectModal');
         const mImg    = document.getElementById('m-img');
         const mTitle  = document.getElementById('m-title');
@@ -1250,8 +1394,67 @@
             document.body.style.overflow = 'auto';
         }
 
+        /* --------------------------------------------------------
+           IMAGE LIGHTBOX
+        -------------------------------------------------------- */
+        const lightboxOverlay  = document.getElementById('lightboxOverlay');
+        const lightboxWrapper  = document.getElementById('lightboxWrapper');
+        const lightboxImg      = document.getElementById('lightbox-img');
+
+        function openLightbox() {
+            const src = mImg.src;
+            const alt = mImg.alt;
+
+            // Set the image source
+            lightboxImg.src = src;
+            lightboxImg.alt = alt;
+
+            // Reset orientation classes
+            lightboxWrapper.classList.remove('portrait', 'landscape');
+
+            // Detect orientation once the image loads (or immediately if cached)
+            if (lightboxImg.complete && lightboxImg.naturalWidth > 0) {
+                applyOrientation(lightboxImg.naturalWidth, lightboxImg.naturalHeight);
+            } else {
+                lightboxImg.onload = () => {
+                    applyOrientation(lightboxImg.naturalWidth, lightboxImg.naturalHeight);
+                };
+            }
+
+            lightboxOverlay.classList.add('active');
+            // Keep body scroll locked (already locked by project modal)
+        }
+
+        function applyOrientation(w, h) {
+            if (w >= h) {
+                lightboxWrapper.classList.add('landscape');
+            } else {
+                lightboxWrapper.classList.add('portrait');
+            }
+        }
+
+        function closeLightbox() {
+            lightboxOverlay.classList.remove('active');
+        }
+
+        function handleLightboxClick(e) {
+            // Close if the user clicks the dark backdrop (not the image or close btn)
+            if (e.target === lightboxOverlay) {
+                closeLightbox();
+            }
+        }
+
+        /* --------------------------------------------------------
+           KEYBOARD — Escape closes lightbox first, then modal
+        -------------------------------------------------------- */
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) toggleModal();
+            if (e.key === 'Escape') {
+                if (lightboxOverlay.classList.contains('active')) {
+                    closeLightbox();
+                } else if (modal.classList.contains('active')) {
+                    toggleModal();
+                }
+            }
         });
     </script>
 </body>
