@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Donny Moricom | UX Portfolio</title>
+    <title>Donny Moricom — UX &amp; Service Designer</title>
     <link rel="icon" href="images/favicon.ico" sizes="64x64">
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
@@ -15,52 +15,178 @@
         :root {
             --primary-navy: #0b2545;
             --medical-blue: #134074;
-            --tech-green: #299d8f;
-            --soft-green: #e9f5f3;
+            --accent: #d4922a;           /* warm amber — replaces muted teal */
+            --accent-soft: #fdf3e5;      /* pale amber for pill/tag backgrounds */
             --white: #ffffff;
             --text-main: #1f2937;
-            --text-muted: #6b7280;
-            --bg-grey: #f3f4f6;
+            --text-muted: #5a5955;        /* warm-tinted, passes WCAG AA on --bg-grey */
+            --bg-grey: #f4f3f1;          /* slightly warm — harmonises with amber */
+
+            /* --- TYPE SCALE (1.25 major-third ratio) --- */
+            --font-display: 'Fraunces', Georgia, serif;
+            --font-body:    'Outfit', system-ui, sans-serif;
+
+            --text-xs:   0.75rem;     /* 12px — captions, micro-labels */
+            --text-sm:   0.875rem;    /* 14px — secondary UI, metadata */
+            --text-base: 1rem;        /* 16px — body copy */
+            --text-lg:   1.25rem;     /* 20px — card titles, lead */
+            --text-xl:   1.5rem;      /* 24px — modal headings */
+            --text-2xl:  2rem;        /* 32px — section headings */
+            --text-hero: clamp(2.5rem, 5vw, 3.5rem); /* fluid hero */
+
+            /* --- LINE HEIGHTS --- */
+            --lh-tight:  1.1;   /* display headings */
+            --lh-snug:   1.3;   /* card titles, subheadings */
+            --lh-base:   1.65;  /* body copy */
+            --lh-relaxed:1.75;  /* small text, captions */
         }
 
         /* --- GLOBAL RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: var(--font-body);
             background-color: var(--bg-grey);
             color: var(--text-main);
-            line-height: 1.6;
+            font-size: var(--text-base);
+            line-height: var(--lh-base);
             overflow-x: hidden;
+            font-kerning: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        h1, h2, h3 { font-family: 'Montserrat', sans-serif; color: var(--primary-navy); }
-        a { text-decoration: none; transition: 0.3s; }
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            color: var(--primary-navy);
+            font-weight: 600;
+            line-height: var(--lh-tight);
+            letter-spacing: -0.02em;
+        }
+        a { text-decoration: none; transition: color 0.25s ease, opacity 0.25s ease; }
 
         /* --- HERO SECTION --- */
         .hero {
-            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--medical-blue) 100%);
+            background: linear-gradient(150deg, #071a33 0%, var(--primary-navy) 45%, var(--medical-blue) 100%);
             color: var(--white);
-            padding: 5rem 2rem;
+            padding: 8rem 2rem 7rem;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Subtle diagonal texture overlay */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(
+                    -52deg,
+                    transparent,
+                    transparent 48px,
+                    rgba(255,255,255,0.022) 48px,
+                    rgba(255,255,255,0.022) 49px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Amber accent glow — bottom-right corner */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -60px;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(212,146,42,0.18) 0%, transparent 65%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero > * { position: relative; z-index: 1; }
+
+        /* --- Hero entrance animations --- */
+        @keyframes heroFadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-img    { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both; }
+        .hero h1        { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s both; }
+        .hero p         { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.4s both; }
+        .social-links   { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.52s both; }
 
         .profile-img {
-            width: 180px;
-            height: 180px;
+            width: 190px;
+            height: 190px;
             object-fit: cover;
             border-radius: 50%;
-            border: 5px solid var(--primary-navy);
-            margin-bottom: 1.5rem;
+            border: 4px solid var(--accent);
+            margin-bottom: 2rem;
             background-color: #fff;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow:
+                0 0 0 8px rgba(212,146,42,0.15),
+                0 16px 40px rgba(0,0,0,0.35);
         }
 
-        .hero h1 { color: var(--white); font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .hero p { max-width: 600px; margin: 0 auto 1.5rem auto; font-size: 1.1rem; opacity: 0.9; }
+        /* Role label — amber, tracked caps, sits between photo and name */
+        .hero-role {
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+            animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.18s both;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: var(--text-hero);
+            font-weight: 700;
+            line-height: var(--lh-tight);
+            letter-spacing: -0.03em;
+            margin-bottom: 0.875rem;
+        }
+        .hero p {
+            max-width: 56ch;
+            margin: 0 auto 0.5rem auto;
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            line-height: var(--lh-base);
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        /* Get in Touch CTA — ghost button in the hero */
+        .hero-cta {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.7rem 2rem;
+            border: 1.5px solid rgba(255,255,255,0.45);
+            border-radius: 4px;
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+            animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.6s both;
+        }
+        .hero-cta:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212,146,42,0.4);
+        }
         
         .social-links a {
             display: inline-flex;
@@ -75,9 +201,11 @@
             margin: 0 8px;
             transition: all 0.3s ease;
         }
-        .social-links a:hover { 
-            background: var(--tech-green); 
-            transform: translateY(-3px);
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--white);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(212,146,42,0.35);
         }
 
         /* --- FILTER MENU --- */
@@ -95,20 +223,25 @@
             background: transparent;
             border: 2px solid var(--primary-navy);
             color: var(--primary-navy);
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 25px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: var(--text-sm);
+            letter-spacing: 0.02em;
             transition: all 0.3s ease;
-            font-family: 'Roboto', sans-serif;
+            font-family: var(--font-body);
         }
 
         .filter-btn:hover, .filter-btn.active {
             background-color: var(--primary-navy);
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 14px rgba(11,37,69,0.2);
+        }
+        .filter-btn.active {
+            border-bottom: 2px solid var(--accent);
+            border-radius: 25px 25px 20px 20px;
         }
 
         /* --- CONTAINER --- */
@@ -120,29 +253,48 @@
 
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 1.5rem;   /* reduced — section header is now just the amber accent line */
         }
-        
-        .section-header h2 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-        .section-header p { color: var(--text-muted); max-width: 700px; margin: 0 auto; }
+
         .section-header::after {
             content: '';
             display: block;
-            width: 80px;
-            height: 4px;
-            background-color: var(--tech-green);
-            margin: 15px auto 0;
-            border-radius: 2px;
+            width: 56px;
+            height: 3px;
+            background: var(--accent);
+            margin: 18px auto 0;
+            border-radius: 0;         /* flat, not rounded — more architectural */
         }
 
         /* --- GRID LAYOUT --- */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem 1.75rem;
         }
 
-        /* --- CARD STYLES (original — unchanged) --- */
+        /* --- FEATURED CARD --- */
+        /* Spans 2 columns on wider viewports — draws the eye to priority work */
+        .card--featured {
+            grid-column: span 2;
+            border-top: 3px solid var(--accent) !important; /* always visible, not just on hover */
+        }
+
+        .card--featured .card-img-holder {
+            height: 260px; /* taller image gives it more presence */
+        }
+
+        .card--featured .card-title {
+            font-size: var(--text-xl);
+        }
+
+        /* Collapse to single column on smaller screens */
+        @media (max-width: 680px) {
+            .card--featured { grid-column: span 1; }
+            .card--featured .card-img-holder { height: 200px; }
+        }
+
+        /* --- CARD STYLES --- */
         .card {
             background: var(--white);
             border-radius: 12px;
@@ -164,9 +316,9 @@
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-            border-top: 5px solid var(--tech-green);
+            transform: translateY(-12px);
+            box-shadow: 0 24px 40px -8px rgba(11,37,69,0.18), 0 8px 16px -4px rgba(11,37,69,0.08);
+            border-top: 5px solid var(--accent);
         }
 
         .card-img-holder {
@@ -210,43 +362,53 @@
         }
 
         .card-title {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            line-height: 1.3;
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            line-height: var(--lh-snug);
+            letter-spacing: -0.015em;
             color: var(--primary-navy);
         }
 
         .card-snippet {
             color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.5;
+            font-size: var(--text-sm);
+            line-height: var(--lh-relaxed);
             margin-bottom: 1rem;
             flex-grow: 1;
         }
 
-        .card-footer { margin-top: auto; }
+        .card-footer {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.875rem;
+        }
 
         .card-pills {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--bg-grey);
+            order: -1;              /* pills appear above the button visually */
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--bg-grey);
         }
 
         .pill {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 6px 10px;
+            padding: 5px 11px;
             border-radius: 999px;
-            font-size: 11px;
-            border: 1px solid rgba(11, 37, 69, 0.2);
-            background: var(--soft-green);
+            font-size: var(--text-xs);
+            font-family: var(--font-body);
+            border: 1px solid rgba(212,146,42,0.3);
+            background: var(--accent-soft);
             color: var(--primary-navy);
-            letter-spacing: 0.2px;
+            letter-spacing: 0.04em;
             font-weight: 500;
+            text-transform: uppercase;
         }
 
         .btn-view {
@@ -254,10 +416,12 @@
             background: var(--primary-navy);
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 13px 20px;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: var(--text-sm);
+            font-family: var(--font-body);
+            letter-spacing: 0.03em;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -267,9 +431,9 @@
         }
 
         .btn-view:hover {
-            background: var(--medical-blue);
+            background: var(--accent);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(212,146,42,0.35);
         }
 
         /* --- PAGE FOOTER --- */
@@ -280,7 +444,7 @@
             padding: 2rem 1rem;
             margin-top: 3rem;
         }
-        footer p { margin: 0; font-size: 0.9rem; }
+        footer p { margin: 0; font-size: var(--text-sm); letter-spacing: 0.01em; }
 
         /* ================================================================
            PROJECT DETAIL MODAL
@@ -300,7 +464,7 @@
         .modal-overlay.active { display: flex; }
 
         .modal-content {
-            background: #c5dbe8;
+            background: #fdfaf5;
             border-radius: 20px;
             max-width: 1020px;
             width: 100%;
@@ -348,22 +512,26 @@
         }
 
         .modal-card-header h2 {
-            font-size: 1.5rem;
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
             font-weight: 700;
             color: var(--primary-navy);
-            margin-bottom: 0.55rem;
-            line-height: 1.3;
+            margin-bottom: 0.6rem;
+            line-height: var(--lh-snug);
+            letter-spacing: -0.02em;
         }
 
         .modal-role-badge {
             display: inline-block;
             background: var(--primary-navy);
             color: #fff;
-            font-size: 0.78rem;
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
             font-weight: 600;
             padding: 5px 16px;
             border-radius: 20px;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
         .modal-card-body {
@@ -429,26 +597,28 @@
         }
 
         .modal-car-block h4 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.93rem;
-            font-weight: 700;
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            font-weight: 600;
             color: var(--primary-navy);
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.35rem;
             display: flex;
             align-items: center;
             gap: 0.4rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
         }
 
         .modal-car-block h4::before {
             content: '▸';
-            color: var(--tech-green);
+            color: var(--accent);
             font-size: 1.05rem;
         }
 
         .modal-car-block p {
-            font-size: 0.84rem;
+            font-size: var(--text-sm);
             color: var(--text-main);
-            line-height: 1.65;
+            line-height: var(--lh-base);
             opacity: 0.9;
         }
 
@@ -462,10 +632,12 @@
         }
 
         .modal-footer-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.82rem;
-            font-weight: 700;
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            font-weight: 600;
             color: var(--primary-navy);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
             white-space: nowrap;
         }
 
@@ -478,11 +650,12 @@
         .modal-tool-pill {
             background: var(--primary-navy);
             color: #fff;
-            font-size: 0.76rem;
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
             font-weight: 500;
             padding: 5px 13px;
             border-radius: 999px;
-            letter-spacing: 0.2px;
+            letter-spacing: 0.03em;
             white-space: nowrap;
         }
 
@@ -578,7 +751,7 @@
         }
 
         .lightbox-close:hover {
-            background: var(--tech-green);
+            background: var(--accent);
             border-color: white;
             transform: rotate(90deg) scale(1.1);
         }
@@ -590,15 +763,38 @@
             left: 50%;
             transform: translateX(-50%);
             color: rgba(255,255,255,0.5);
-            font-size: 0.78rem;
-            letter-spacing: 0.5px;
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
             pointer-events: none;
+        }
+
+        /* --- FOCUS STYLES — keyboard accessibility --- */
+        :focus-visible {
+            outline: 2.5px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 3px;
+        }
+
+        /* --- REDUCED MOTION — respect user preference --- */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
+            .hero { padding: 5rem 1.5rem 4rem; }
+            .hero h1 { font-size: 2.25rem; letter-spacing: -0.02em; }
             .grid { grid-template-columns: 1fr; }
+            .card--featured { grid-column: span 1; }
+            .card--featured .card-img-holder { height: 200px; }
             .filter-container { padding: 1.5rem 1rem 0 1rem; }
             .modal-overlay { padding: 1rem; }
             .modal-card-body { grid-template-columns: 1fr; }
@@ -612,14 +808,16 @@
 
     <!-- HERO HEADER -->
     <div class="hero">
-        <img src="images/headshot.png" alt="Profile Picture" class="profile-img">
-        <h1>Donny Moricom | UX Portfolio</h1>
-        <p>UX Designer with deep project delivery experience. With over fifteen years leading digital and service design work in finance, healthcare, and pharmaceutical environments where clarity, compliance, and delivery matter.</p>
+        <img src="images/headshot.png" alt="Donny Moricom" class="profile-img">
+        <p class="hero-role">UX &amp; Service Designer</p>
+        <h1>Donny Moricom</h1>
+        <p>15 years of digital and service design across finance, healthcare, and pharma — where clarity, compliance, and delivery matter.</p>
         <div class="social-links">
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
-            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/donnymoricom/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:eudonni@emit.studio" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://github.com/moricomee" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
         </div>
+        <a href="mailto:eudonni@emit.studio" class="hero-cta">Get in Touch</a>
     </div>
 
     <!-- FILTERS -->
@@ -633,9 +831,7 @@
 
     <!-- PROJECTS CONTAINER -->
     <div class="container">
-        <div class="section-header">
-            <p>Filter by category and open each project for more detail to explore my UX portfolio across app design, application development, dashboards and educational UX projects</p>
-        </div>
+        <div class="section-header"></div>
 
         <div class="grid">
 
@@ -671,7 +867,7 @@
                 </div>
             </div>
 
-            <div class="card show" data-category="professional-application">
+            <div class="card show card--featured" data-category="professional-application">
                 <div class="card-img-holder">
                     <img src="images/CIMAS_App.png" alt="CIMAS Online">
                 </div>
@@ -765,7 +961,7 @@
                 </div>
             </div>
 
-            <div class="card show" data-category="professional-application">
+            <div class="card show card--featured" data-category="professional-application">
                 <div class="card-img-holder">
                     <img src="images/FoodMama_Apps.png" alt="FoodMama Application">
                 </div>
@@ -931,8 +1127,8 @@
                             <img src="images/Cielo Costa-01.png" alt="Cielo Costa Logo" class="company-logo">
                         </a>
                     </div>
-                    <h3 class="card-title">Corporate Website</h3>
-                    <p class="card-snippet">Corporate portal designed for marketing purposes.</p>
+                    <h3 class="card-title">Cielo Costa Corporate Website</h3>
+                    <p class="card-snippet">Brand-aligned marketing portal designed and delivered on SquareSpace — multi-device, content-managed.</p>
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Cielo Costa — Corporate Portal"
@@ -962,8 +1158,8 @@
                             <img src="images/JWPM Consulting Logo Full-01.png" alt="JWPM Logo" class="company-logo">
                         </a>
                     </div>
-                    <h3 class="card-title">Corporate Website</h3>
-                    <p class="card-snippet">Corporate portal designed for marketing purposes.</p>
+                    <h3 class="card-title">JWPM Corporate Website</h3>
+                    <p class="card-snippet">Marketing portal for a project management consultancy — brand-aligned, built on SquareSpace.</p>
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="JWPM — Corporate Portal"
@@ -993,8 +1189,8 @@
                             <img src="images/inTwisticLogo.png" alt="Intwistic Logo" class="company-logo">
                         </a>
                     </div>
-                    <h3 class="card-title">Corporate Marketing Website</h3>
-                    <p class="card-snippet">Corporate website designed for marketing purposes.</p>
+                    <h3 class="card-title">Intwistic Marketing Website</h3>
+                    <p class="card-snippet">Multi-device marketing site for a digital product studio — brand identity applied across all touchpoints.</p>
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="Intwistic — Marketing Portal"
@@ -1024,8 +1220,8 @@
                             <img src="images/Foodmama-Logos-03.png" alt="FoodMama Logo" class="company-logo">
                         </a>
                     </div>
-                    <h3 class="card-title">Corporate Marketing Website</h3>
-                    <p class="card-snippet">Corporate website designed for marketing purposes.</p>
+                    <h3 class="card-title">FoodMama Marketing Website</h3>
+                    <p class="card-snippet">Consumer-facing marketing site for a hospitality platform — designed to convert and complement the app experience.</p>
                     <div class="card-footer">
                         <button class="btn-view" onclick="openModal(this)"
                             data-title="FoodMama — Marketing Portal"
@@ -1046,7 +1242,7 @@
             </div>
 
             <!-- ===== PROFESSIONAL DASHBOARD ===== -->
-            <div class="card show" data-category="professional-dashboard">
+            <div class="card show card--featured" data-category="professional-dashboard">
                 <div class="card-img-holder">
                     <img src="images/Aimmune_Dashboard.png" alt="Aimmune PowerBI Dashboard">
                 </div>
@@ -1268,7 +1464,7 @@
     </div>
 
     <footer>
-        <p>&copy; Eudonni Moricom 2026 | EMIT Studio ©. All rights reserved.</p>
+        <p>Donny Moricom &mdash; UX &amp; Service Designer &nbsp;&middot;&nbsp; &copy; 2026 EMIT Studio</p>
     </footer>
 
     <!-- ================================================================
