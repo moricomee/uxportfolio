@@ -67,9 +67,23 @@
 
         /* --- HERO SECTION --- */
         .hero {
-            background: linear-gradient(150deg, #071a33 0%, var(--primary-navy) 45%, var(--medical-blue) 100%);
             color: var(--white);
-            padding: 8rem 2rem 7rem;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .hero-banner {
+            width: 100%;
+            display: block;
+            max-height: 420px;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .hero-content {
+            background: linear-gradient(150deg, #071a33 0%, var(--primary-navy) 45%, var(--medical-blue) 100%);
+            padding: 2.25rem 2rem 2.5rem;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -79,7 +93,7 @@
         }
 
         /* Subtle diagonal texture overlay */
-        .hero::before {
+        .hero-content::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -96,7 +110,7 @@
         }
 
         /* Amber accent glow — bottom-right corner */
-        .hero::after {
+        .hero-content::after {
             content: '';
             position: absolute;
             bottom: -80px;
@@ -108,7 +122,7 @@
             z-index: 0;
         }
 
-        .hero > * { position: relative; z-index: 1; }
+        .hero-content > * { position: relative; z-index: 1; }
 
         /* --- Hero entrance animations --- */
         @keyframes heroFadeUp {
@@ -116,25 +130,12 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        .profile-img    { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both; }
-        .hero h1        { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s both; }
-        .hero p         { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.4s both; }
-        .social-links   { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.52s both; }
+        .hero-banner   { animation: heroFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.05s both; }
+        .hero h1       { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s both; }
+        .hero-content p { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.4s both; }
+        .hero-actions  { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.52s both; }
 
-        .profile-img {
-            width: 190px;
-            height: 130px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid var(--accent);
-            margin-bottom: 2rem;
-            background-color: #fff;
-            box-shadow:
-                0 0 0 8px rgba(212,146,42,0.15),
-                0 16px 40px rgba(0,0,0,0.35);
-        }
-
-        /* Role label — amber, tracked caps, sits between photo and name */
+        /* Role label — amber, tracked caps */
         .hero-role {
             font-family: var(--font-body);
             font-size: var(--text-xs);
@@ -142,7 +143,7 @@
             letter-spacing: 0.14em;
             text-transform: uppercase;
             color: var(--accent);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
             animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.18s both;
         }
 
@@ -152,21 +153,29 @@
             font-weight: 700;
             line-height: var(--lh-tight);
             letter-spacing: -0.03em;
-            margin-bottom: 0.875rem;
+            margin-bottom: 0.75rem;
         }
-        .hero p {
+        .hero-content p {
             max-width: 56ch;
-            margin: 0 auto 0.5rem auto;
             font-size: clamp(1rem, 2vw, 1.15rem);
             line-height: var(--lh-base);
             opacity: 0.8;
             font-weight: 400;
         }
 
+        /* CTA + social icons on one row */
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         /* Get in Touch CTA — ghost button in the hero */
         .hero-cta {
             display: inline-block;
-            margin-top: 1.5rem;
             padding: 0.7rem 2rem;
             border: 1.5px solid rgba(255,255,255,0.45);
             border-radius: 4px;
@@ -178,7 +187,6 @@
             text-transform: uppercase;
             text-decoration: none;
             transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
-            animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.6s both;
         }
         .hero-cta:hover {
             background: var(--accent);
@@ -187,7 +195,12 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(212,146,42,0.4);
         }
-        
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
         .social-links a {
             display: inline-flex;
             justify-content: center;
@@ -198,7 +211,7 @@
             border-radius: 50%;
             color: var(--white);
             font-size: 1.2rem;
-            margin: 0 8px;
+            margin: 0 5px;
             transition: all 0.3s ease;
         }
         .social-links a:hover {
@@ -790,8 +803,10 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .hero { padding: 5rem 1.5rem 4rem; }
+            .hero-banner { max-height: 260px; }
+            .hero-content { padding: 1.75rem 1.25rem 2rem; }
             .hero h1 { font-size: 2.25rem; letter-spacing: -0.02em; }
+            .hero-actions { gap: 0.5rem; }
             .grid { grid-template-columns: 1fr; }
             .card--featured { grid-column: span 1; }
             .card--featured .card-img-holder { height: 200px; }
@@ -808,16 +823,20 @@
 
     <!-- HERO HEADER -->
     <div class="hero">
-        <img src="images/headshot.png" alt="Donny Moricom" class="profile-img">
-        <p class="hero-role">UX &amp; Service Designer</p>
-        <h1>Donny Moricom</h1>
-        <p>15 years of digital and service design across finance, healthcare, and pharmaceutical: where clarity, efficiency, compliance and delivery matter.</p>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/eudonni/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:eudonni@emit.studio" aria-label="Email"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/moricomee" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <img src="images/Eudonni_Moricom_ProPhoto_Profiles.png" alt="Donny Moricom professional photo" class="hero-banner">
+        <div class="hero-content">
+            <p class="hero-role">UX &amp; Service Designer</p>
+            <h1>Donny Moricom</h1>
+            <p>15 years of digital and service design across finance, healthcare, and pharmaceutical: where clarity, efficiency, compliance and delivery matter.</p>
+            <div class="hero-actions">
+                <a href="mailto:eudonni@emit.studio" class="hero-cta">Get in Touch</a>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/eudonni/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:eudonni@emit.studio" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/moricomee" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
         </div>
-        <a href="mailto:eudonni@emit.studio" class="hero-cta">Get in Touch</a>
     </div>
 
     <!-- FILTERS -->
